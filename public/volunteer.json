@@ -1,0 +1,38 @@
+[
+    {
+        "name":"Child Support",
+        "img":"childSupport.png"
+    },
+    {
+        "name":"Refuge Shelter",
+        "img":"refugeShelter.png"
+    },
+    {
+        "name":"Food Charity",
+        "img":"foodCharity.png"
+    },
+    {
+        "name":"Host A Clothing Swap",
+        "img":"clothSwap.png"
+    },
+    {
+        "name":"Host A River Clean Up",
+        "img":"riverClean.png"
+    },
+    {
+        "name":"Clean Water For Children",
+        "img":"cleanWater.png"
+    },
+    {
+        "name":"Good Education",
+        "img":"goodEducation.png"
+    },
+    {
+        "name":"Host A Study Group",
+        "img":"studyGroup.png"
+    },
+    {
+        "name":"Build Birdhouses For Your Neighbors",
+        "img":"birdHouse.png"
+    }
+]
