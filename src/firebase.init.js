@@ -13,14 +13,6 @@ const firebaseConfig = {
   messagingSenderId: process.env.REACT_APP_messagingSenderId,
   appId:process.env.REACT_APP_appId 
 };
-// const firebaseConfig = {
-//     apiKey: "AIzaSyAxxEKz9o3eS94C2O7OEdScSHI_7rqWTVE",
-//     authDomain: "volunteer-network-d8743.firebaseapp.com",
-//     projectId: "volunteer-network-d8743",
-//     storageBucket: "volunteer-network-d8743.appspot.com",
-//     messagingSenderId: "903519053676",
-//     appId: "1:903519053676:web:4033dcef81bdf3de567549"
-//   };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
