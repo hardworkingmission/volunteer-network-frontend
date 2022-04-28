@@ -1,26 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, {} from 'react';
+import { Link} from 'react-router-dom';
 import logo from '../../../logos/Group 1329.png'
 import CustomLink from '../../CustomLink/CustomLink';
 import auth from '../../../firebase.init';
-import {onAuthStateChanged,signOut } from "firebase/auth";
+import {signOut } from "firebase/auth";
+import useAuthState from '../../../hooks/useAuthState/useAuthState';
 
 const Header = () => {
-    const [currentUser,setCurrentUser]=useState({})
-    const [flag,setFlag]=useState(false)
-    const navigate=useNavigate()
-    //const user=auth.currentUser
-    useEffect(()=>{
-        onAuthStateChanged(auth,(user)=>{
-            if(user){
-                setCurrentUser(user)
-            }else{
-                //navigate('/')
-            }
-    
-        })
+    //const [currentUser,setCurrentUser]=useState({})
+    const [currentUser,loading,setCurrentUser] =useAuthState()
+    //const [flag,setFlag]=useState(false)
+    //const navigate=useNavigate()
 
-    },[])
     const handleSignOut=()=>{
         signOut(auth)
           .then(()=>{

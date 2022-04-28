@@ -9,6 +9,7 @@ import Admin from './components/Admin/Admin';
 import VolunteerList from './components/VolunteerList/VolunteerList';
 import SignUp from './components/SignUp/SignUp'
 import LogIn from './components/LogIn/LogIn'
+import RequireAuth from './components/RequireAuth/RequireAuth';
 
 function App() {
   return (
@@ -17,12 +18,24 @@ function App() {
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/checkout/'>
-          <Route path=':volunteerServiceId' element={<Checkout/>}/>
+          <Route path=':volunteerServiceId' element={
+          <RequireAuth>
+            <Checkout/>
+          </RequireAuth>
+          }/>
         </Route>
-        <Route path='/events' element={<Events/>}/>
+        <Route path='/events' element={
+          <RequireAuth>
+            <Events/>
+          </RequireAuth>
+        }/>
         <Route path='/signup' element={<SignUp/>}/>
         <Route path='/login'element={<LogIn/>}/>
-        <Route path='/admin' element={<Admin/>}>
+        <Route path='/admin' element={
+          <RequireAuth>
+            <Admin/>
+          </RequireAuth>
+        }>
             <Route path='addevent' element={<AddEvent/>}/>
             <Route path='volunteerlist' element={<VolunteerList/>}/>
             <Route index element={<VolunteerList/>}/>

@@ -58,7 +58,7 @@ const SignUp = () => {
 
                 <input className='border-b-2 p-2 w-full outline-none' type="password" name="confirmPassword"  placeholder='Confirm Password' required autoComplete='off' value={confirmPassword} onChange={handleChange}/><br /><br />
                  <p className='text-red-600'>{error&&error}</p>
-                <input type="submit" className='p-2 bg-blue-600 text-white font-bold text-lg rounded w-1/2' value="Sign Up" />
+                <input type="submit" className='p-2 bg-blue-600 text-white font-bold text-lg rounded w-1/2 cursor-pointer' value="Sign Up" />
 
                 <div className=''>
                     Already have an account? <Link to={'/login'} className='text-blue-600'>Login</Link>
