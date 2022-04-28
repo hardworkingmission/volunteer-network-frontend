@@ -1,8 +1,35 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../../logos/Group 1329.png'
+import CustomLink from '../../CustomLink/CustomLink';
+import auth from '../../../firebase.init';
+import {onAuthStateChanged,signOut } from "firebase/auth";
 
 const Header = () => {
+    const [currentUser,setCurrentUser]=useState({})
+    const [flag,setFlag]=useState(false)
+    const navigate=useNavigate()
+    //const user=auth.currentUser
+    useEffect(()=>{
+        onAuthStateChanged(auth,(user)=>{
+            if(user){
+                setCurrentUser(user)
+            }else{
+                //navigate('/')
+            }
+    
+        })
+
+    },[])
+    const handleSignOut=()=>{
+        signOut(auth)
+          .then(()=>{
+              currentUser.uid=''
+              setCurrentUser({...currentUser})
+              //navigate('/login')
+          })
+    }
+
     return (
         <header className='w-full mx-auto'>
             <nav className="
@@ -45,36 +72,26 @@ const Header = () => {
                             {/* <!-- Left links --> */}
                                 <ul className="navbar-nav flex flex-col pl-0 list-style-none ml-auto">
                                     <li className="nav-item px-2 mb-2">
-                                        <Link className="nav-link active" aria-current="page" to='/'>Home</Link>
+                                        <CustomLink className="nav-link active" aria-current="page" to='/'>Home</CustomLink>
                                     </li>
                                     <li className="nav-item pr-2 mb-2">
-                                        <Link className="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0" to='/donation'>Donation</Link>
+                                        <CustomLink className="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0" to='/events'>Events</CustomLink>
                                     </li>
                                     <li className="nav-item pr-2 mb-2">
-                                        <Link className="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0" to='/events'>Events</Link>
+                                        <CustomLink className="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0" to='/admin'>Admin</CustomLink>
                                     </li>
-                                    <li className="nav-item pr-2 mb-2">
-                                        <Link className="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0" to='/events'>Blog</Link>
-                                    </li>
+                                    {
+                                        currentUser?.uid?<button className='bg-blue-600 rounded px-2 py-1 font-bold text-white' onClick={handleSignOut}>Sign Out</button>:
+                                        <li className="nav-item pr-2 mb-2">
+                                            <CustomLink className="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0" to='/login'>LogIn</CustomLink>
+                                       </li>
+                                    }
                                 </ul>
                             {/* <!-- Left links --> */}
                         </div>
                         {/* <!-- Collapsible wrapper --> */}
                     </div>
             </nav>
-            <div className="title text-center my-3">
-                <h3 className='text-3xl font-bold'>I grow by helping people in need.</h3>
-            </div>
-            <div className="search my-3">
-                <div className="flex justify-center">
-                    <div className="mb-3 xl:w-96">
-                        <div className="input-group relative flex flex-wrap items-stretch w-full mb-4">
-                        <input type="search" className="form-control relative flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white border border-2 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:outline-none" placeholder="Search" aria-label="Search" aria-describedby="button-addon3"/>
-                        <button className="btn inline-block px-6 py-3 border border-2 text-white font-lg text-lg bg-blue-600 leading-tight uppercase rounded hover:bg-blue-400 hover:bg-opacity-1 focus:outline-none focus:ring-0 transition duration-150 ease-in-out" type="button" id="button-addon3">Search</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
             
         </header>
     );
